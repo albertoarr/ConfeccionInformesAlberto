@@ -1,14 +1,22 @@
-import { IonContent, IonText, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import './Home.css';
+import {
+  IonContent,
+  IonText,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+} from "@ionic/react";
+import "./Home.css";
+import { getAlumnos } from "../hooks/getAlumnos";
+import { AlumnList } from "../components/AlumnList/AlumnList";
 
-const Home: React.FC = () => {
+export function Home() {
+  const { data: alumnos } = getAlumnos();
+
   return (
     <IonPage>
       <IonContent fullscreen>
-        <IonText>Hola putita</IonText>
+        <AlumnList alumnos={alumnos} />
       </IonContent>
     </IonPage>
   );
-};
-
-export default Home;
+}
