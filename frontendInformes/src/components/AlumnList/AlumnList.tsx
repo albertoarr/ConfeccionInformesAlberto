@@ -2,14 +2,14 @@ import React from "react";
 import { Alumno } from "../../interfaces/interfaces";
 
 interface AlumnListProps {
-    data: Alumno[]|undefined
+    alumnos?: Alumno[]
 }
 
-export function AlumnList({ data }: AlumnListProps) {
+export default function AlumnList({ alumnos }: AlumnListProps) {
   return (
     <div>
-      {data &&
-        data.map((alumno) => (
+      {alumnos &&
+        alumnos.map((alumno) => (
           <li key={alumno.id}>
             {alumno.nombre} - {alumno.matricula} - {alumno.email}
           </li>

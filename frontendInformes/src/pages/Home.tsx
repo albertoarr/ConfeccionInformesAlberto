@@ -1,15 +1,9 @@
-import {
-  IonContent,
-  IonText,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-} from "@ionic/react";
+import { IonContent, IonPage } from "@ionic/react";
 import "./Home.css";
 import { getAlumnos } from "../hooks/getAlumnos";
-import { AlumnList } from "../components/AlumnList/AlumnList";
+import AlumnList from "../components/AlumnList/AlumnList";
 
-export function Home() {
+export default function Home() {
   const { data: alumnos } = getAlumnos();
 
   return (
