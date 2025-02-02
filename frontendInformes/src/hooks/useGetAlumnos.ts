@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Alumno } from "../interfaces/interfaces";
 
-export function getAlumnos(): { data: Alumno[] | undefined } {
+export function useGetAlumnos(): { data: Alumno[] | undefined } {
   const [data, setData] = useState<Alumno[] | undefined>(undefined);
 
   const getJson = async () => {
