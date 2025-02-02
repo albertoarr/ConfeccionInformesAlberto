@@ -48,6 +48,53 @@ app.get("/api/alumnos", async (req, res) => {
   }
 });
 
+// UPDATE
+app.put("/api/alumnos/:id", async (req, res) => {
+  const { id } = req.params;
+  const { matricula, nombre, sexo, email, repetidor, activo } = req.body;
+
+  try {
+    const result = await connection`
+      UPDATE alumnos
+      SET matricula = ${matricula}, nombre = ${nombre}, sexo = ${sexo}, 
+          email = ${email}, repetidor = ${repetidor}, activo = ${activo}
+      WHERE id = ${id}
+      RETURNING *;
+    `;
+
+    if (result.length === 0) {
+      return res.status(404).json({ error: "Alumno no encontrado" });
+    }
+
+    res.json(result[0]);
+  } catch (e) {
+    console.error("Error al actualizar el alumno:", e);
+    res.status(500).json({ error: "Error al actualizar el alumno" });
+  }
+});
+
+// DELETE
+app.delete("/api/alumnos/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const result = await connection`
+      DELETE FROM alumnos
+      WHERE id = ${id}
+      RETURNING *;
+    `;
+
+    if (result.length === 0) {
+      return res.status(404).json({ error: "Alumno no encontrado" });
+    }
+
+    res.json({ message: "Alumno eliminado exitosamente", alumno: result[0] });
+  } catch (e) {
+    console.error("Error al eliminar el alumno:", e);
+    res.status(500).json({ error: "Error al eliminar el alumno" });
+  }
+});
+
 // Iniciar el servidor
 app.listen(port, () => {
   console.log(`El servidor está corriendo en el puerto ${port}`);

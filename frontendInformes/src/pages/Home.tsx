@@ -9,9 +9,18 @@ export default function Home() {
 
   return (
     <IonPage>
-      <IonContent fullscreen>
-        <AlumnList alumnos={alumnos} />
-        <AlumnForm/>
+      <IonContent className="container-fluid">
+        <div className="row bg-primary">
+          <div className="col-12">
+            <AlumnList alumnos={alumnos} />
+          </div>
+          <div className="col-12">
+            <AlumnForm />
+          </div>
+          <div className="col-2">
+            <p>hola</p>
+          </div>
+        </div>
       </IonContent>
     </IonPage>
   );
