@@ -1,16 +1,6 @@
 import React, { useState } from "react";
 import { useInsertAlumno } from "../../hooks/useInsertAlumno";
 
-interface Student {
-  id: number;
-  matricula: string;
-  nombre: string;
-  sexo: string;
-  email: string;
-  repetidor: boolean;
-  activo: boolean;
-}
-
 interface NewStudent {
   matricula: string;
   nombre: string;
@@ -29,6 +19,8 @@ export default function AlumnForm() {
     repetidor: false,
     activo: true,
   });
+
+  const { insertAlumno } = useInsertAlumno();
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -52,7 +44,7 @@ export default function AlumnForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    useInsertAlumno(newStudent);
+    insertAlumno(newStudent);
     setNewStudent({
       matricula: "",
       nombre: "",

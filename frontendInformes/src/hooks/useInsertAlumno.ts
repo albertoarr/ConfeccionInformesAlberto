@@ -1,7 +1,7 @@
 import { AlumnoNuevo } from "../interfaces/interfaces";
 
-export function useInsertAlumno(nuevoAlumno: AlumnoNuevo) {
-  const postJson = async () => {
+export function useInsertAlumno() {
+  const insertAlumno = async (nuevoAlumno: AlumnoNuevo) => {
     try {
       const response = await fetch("http://localhost:3002/api/alumnos", {
         method: "POST",
@@ -18,5 +18,5 @@ export function useInsertAlumno(nuevoAlumno: AlumnoNuevo) {
     }
   };
 
-  postJson();
+  return { insertAlumno };
 }
