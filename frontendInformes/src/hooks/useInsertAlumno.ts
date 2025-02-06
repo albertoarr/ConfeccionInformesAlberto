@@ -11,6 +11,7 @@ export function useInsertAlumno() {
         body: JSON.stringify(nuevoAlumno),
       });
 
+      // Devuelve el alumno en la consola (no hace falta para el put)
       const data = await response.json();
       console.log(data);
     } catch (error) {

@@ -8,7 +8,8 @@ export interface Alumno {
   activo: boolean;
 }
 
-export interface AlumnoNuevo { // Para insertarlo en la BBDD (porque id es serial)
+export interface AlumnoNuevo {
+  // Para usar CREATE (no sé usar Omit)
   matricula: string;
   nombre: string;
   sexo: string;

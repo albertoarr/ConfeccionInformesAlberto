@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useInsertAlumno } from "../../hooks/useInsertAlumno";
+import { EraserIcon } from "../icons/EraserIcon";
 
 interface NewStudent {
   matricula: string;
@@ -45,6 +46,19 @@ export default function AlumnForm() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     insertAlumno(newStudent);
+    // Después de insertar el alumno, restablecemos el formulario
+    setNewStudent({
+      matricula: "",
+      nombre: "",
+      sexo: "",
+      email: "",
+      repetidor: false,
+      activo: true,
+    });
+  };
+
+  // Nuevo manejador de reset
+  const handleReset = () => {
     setNewStudent({
       matricula: "",
       nombre: "",
@@ -122,6 +136,15 @@ export default function AlumnForm() {
         className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition duration-200"
       >
         Register Student
+      </button>
+      
+      {/* Botón de reset que invoca el manejador handleReset */}
+      <button 
+        type="button" 
+        onClick={handleReset} 
+        className="mt-2 w-full text-gray-500 p-2 border rounded hover:bg-gray-100"
+      >
+        <EraserIcon /> Reset Form
       </button>
     </form>
   );
