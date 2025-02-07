@@ -25,7 +25,7 @@ export default function AlumnList({ alumnos }: AlumnListProps) {
   };
 
   return (
-    <div className="table-responsive">
+    <div className="alumnList table-responsive">
       <table className="table table-dark table-striped table-bordered text-center align-middle">
         <thead>
           <tr>
