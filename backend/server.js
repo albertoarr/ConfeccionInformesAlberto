@@ -40,7 +40,7 @@ app.post("/api/alumnos", async (req, res) => {
 // READ
 app.get("/api/alumnos", async (req, res) => {
   try {
-    const result = await connection`SELECT * FROM alumnos`;
+    const result = await connection`SELECT * FROM alumnos ORDER BY id`;
     res.json(result);
   } catch (e) {
     console.error("Error en la consulta:", e);
