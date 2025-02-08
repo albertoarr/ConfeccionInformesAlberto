@@ -4,19 +4,18 @@ import AlumnList from "../components/AlumnList/AlumnList";
 import AlumnForm from "../components/AlumnForm/AlumnForm";
 
 export default function Home() {
-  const { data: alumnos } = useGetAlumnos();
-
   return (
     <IonGrid>
-      <IonRow style={{ justifyContent: "center", alignItems: "center"}}>
-        <IonCol size="10">
-          <AlumnList alumnos={alumnos} />
+      <IonRow
+        style={{
+          display: "flex",
+          justifyContent: "space-evenly",
+        }}
+      >
+        <IonCol size="7">
+          <AlumnList />
         </IonCol>
-      </IonRow>
-      <IonRow>
-        <IonCol>
-          <AlumnForm />
-        </IonCol>
+        <IonCol size="4">hola</IonCol>
       </IonRow>
     </IonGrid>
   );

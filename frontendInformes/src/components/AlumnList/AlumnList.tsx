@@ -1,17 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { IonButton, IonIcon } from "@ionic/react";
-import { trash } from "ionicons/icons";
+import { trash, create } from "ionicons/icons";
 import { Alumno } from "../../interfaces/interfaces";
 import { useDeleteAlumno } from "../../hooks/useDeleteAlumno";
 import "./AlumnList.css";
-import { EraserIcon } from "../icons/EraserIcon";
+import { useGetAlumnos } from "../../hooks/useGetAlumnos";
 
-interface AlumnListProps {
-  alumnos?: Alumno[];
-}
-
-export default function AlumnList({ alumnos }: AlumnListProps) {
+export default function AlumnList() {
+  const { data } = useGetAlumnos();
   const { deleteAlumno } = useDeleteAlumno();
+  const [alumnos, setAlumnos] = useState<Alumno[] | undefined>();
+
+  useEffect(() => {
+    // Necesario para que
+    setAlumnos(data);
+  }, [data]);
 
   const handleDelete = async (alumno: Alumno) => {
     if (alumno) {
@@ -19,7 +22,10 @@ export default function AlumnList({ alumnos }: AlumnListProps) {
       if (response.error) {
         alert(response.error); // Si ocurre un error, lo mostramos
       } else {
-        alert("Alumno eliminado con éxito");
+        alert("Alumno eliminado con éxito de la base de datos");
+        setAlumnos((prevAlumnos) =>
+          prevAlumnos?.filter((a) => a.id != alumno.id)
+        );
       }
     }
   };
@@ -36,6 +42,7 @@ export default function AlumnList({ alumnos }: AlumnListProps) {
             <th>Email</th>
             <th>Repetidor</th>
             <th>Activo</th>
+            <th>Editar</th>
             <th>Eliminar</th>
           </tr>
         </thead>
@@ -51,6 +58,13 @@ export default function AlumnList({ alumnos }: AlumnListProps) {
                 <td>{alumno.repetidor ? "sí" : "no"}</td>
                 <td>{alumno.activo ? "sí" : "no"}</td>
                 <td>
+                  <IonButton
+                    color="tertiary"
+                    onClick={() => {}}
+                  >
+                    <IonIcon icon={create} />
+                  </IonButton>
+                </td><td>
                   <IonButton
                     color="danger"
                     onClick={() => handleDelete(alumno)}
