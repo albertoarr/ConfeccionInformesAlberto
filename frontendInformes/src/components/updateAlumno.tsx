@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useUpdateAlumno } from "../hooks/useUdateAlumno";
 import { Alumno } from "../interfaces/interfaces";
 

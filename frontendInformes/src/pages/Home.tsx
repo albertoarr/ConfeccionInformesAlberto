@@ -10,13 +10,14 @@ export default function Home() {
       <IonRow
         style={{
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: "space-evenly",
+          alignItems: "center"
         }}
       >
         <IonCol size="7">
           <AlumnList />
         </IonCol>
-        <IonCol size="4"><UpdateAlumno/></IonCol>
+        <IonCol size="4"><AlumnForm/></IonCol>
       </IonRow>
     </IonGrid>
   );

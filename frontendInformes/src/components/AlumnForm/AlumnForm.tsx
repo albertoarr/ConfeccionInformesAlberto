@@ -1,10 +1,25 @@
 import React, { useState } from "react";
-import { IonItem, IonInput, IonList } from "@ionic/react";
+import {
+  IonItem,
+  IonInput,
+  IonList,
+  IonButton,
+  IonLabel,
+  IonSelect,
+  IonSelectOption,
+  IonToggle,
+  IonCheckbox,
+} from "@ionic/react";
 import { useInsertAlumno } from "../../hooks/useInsertAlumno";
 import { AlumnoNuevo } from "../../interfaces/interfaces";
 
-
-export default function AlumnForm() {
+/**
+ * Funcionamiento del formulario:
+ * 1. Al hacer submit se obtiene un "event".
+ * 2. El "event" recibe los datos del nombre y valor de cada input.
+ * 3. Luego, se actualiza el estado con los valores ingresados.
+ */
+export default function AlumnForm({/* recibir el setAlumnos de home para hacer cositas*/}) {
   const { insertAlumno } = useInsertAlumno();
   const [alumnoNuevo, setAlumnoNuevo] = useState<AlumnoNuevo>({
     matricula: "",
@@ -12,42 +27,130 @@ export default function AlumnForm() {
     sexo: "",
     email: "",
     repetidor: false,
-    activo: true
+    activo: true,
   });
 
-  const handleChange = (e: any) => {
-    const { name, value, type, checked } = e.target;
+  // Función para resetear al alumno
+  const resetAlumno = () =>
+    setAlumnoNuevo({
+      matricula: "",
+      nombre: "",
+      sexo: "",
+      email: "",
+      repetidor: false,
+      activo: true,
+    });
+
+  /**
+   * Este método, al rellenar y accionar el campo, actualiza el estado del formulario.
+   * Se obtiene el nombre y valor del input.
+   */
+  const handleChange = (event: CustomEvent) => {
+    const target = event.target as HTMLInputElement;
+
+    // Verifica si es un checkbox/toggle correctamente (no sé porqué target.value no existe)
+    let value = "checked" in target ? target.checked : target.value;
+    if ("checked" in target)
+      value = target.checked;
+    else
+      value = target.value
+
+    // Actualiza el state de alumno con los datos del "event"
     setAlumnoNuevo((prevState) => ({
       ...prevState,
-      [name]: type === "checkbox" ? checked : value,
+      [target.name]: value,
     }));
   };
 
+  /**
+   * Este método recoge los datos del estado y los envía a la API.
+   * Se previene la recarga de la página con `e.preventDefault()`.
+   */
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault(); // Evita que se recargue la página
     console.log("Submitting:", alumnoNuevo);
-    // Aquí iría tu lógica para enviar los datos.
-    insertAlumno(alumnoNuevo)
+    insertAlumno(alumnoNuevo); // Lanza el POST a la API
+    alert("");
   };
 
   return (
     <div className="">
       <form onSubmit={handleSubmit}>
-        <div>
-          <IonList>
-            <IonItem>
-              <IonInput
-                label="Register"
-                type="text"
-                name="matricula"
-                value={alumnoNuevo.matricula}
-                onIonChange={handleChange}
-                required
-              />
-            </IonItem>
-          </IonList>
-        </div>
-        <div></div>
+        <IonList>
+          {/* Campo Matrícula */}
+          <IonItem>
+            <IonLabel position="fixed">Matrícula</IonLabel>
+            <IonInput
+              type="text"
+              name="matricula"
+              value={alumnoNuevo.matricula} // Recoge el valor al mismo tiempo que se escribe
+              onIonInput={handleChange}
+              required
+            />
+          </IonItem>
+
+          {/* Campo Nombre */}
+          <IonItem>
+            <IonLabel position="fixed">Nombre</IonLabel>
+            <IonInput
+              type="text"
+              name="nombre"
+              value={alumnoNuevo.nombre}
+              onIonInput={handleChange}
+              required
+            />
+          </IonItem>
+
+          {/* Campo Sexo */}
+          <IonItem>
+            <IonLabel>Sexo</IonLabel>
+            <IonSelect
+              name="sexo"
+              value={alumnoNuevo.sexo}
+              onIonChange={handleChange}
+            >
+              <IonSelectOption value="M">Masculino</IonSelectOption>
+              <IonSelectOption value="F">Femenino</IonSelectOption>
+            </IonSelect>
+          </IonItem>
+
+          {/* Campo Correo Electrónico */}
+          <IonItem>
+            <IonLabel position="fixed">Correo Electrónico</IonLabel>
+            <IonInput
+              type="email"
+              name="email"
+              value={alumnoNuevo.email}
+              onIonInput={handleChange}
+              required
+            />
+          </IonItem>
+
+          {/* Campo Repetidor */}
+          <IonItem>
+            <IonLabel>Repetidor</IonLabel>
+            <IonToggle
+              name="repetidor"
+              checked={alumnoNuevo.repetidor}
+              onIonChange={handleChange}
+            />
+          </IonItem>
+
+          {/* Campo Activo */}
+          <IonItem>
+            <IonLabel>Activo</IonLabel>
+            <IonCheckbox
+              name="activo"
+              checked={alumnoNuevo.activo}
+              onIonChange={handleChange}
+            />
+          </IonItem>
+        </IonList>
+
+        {/* Botón para enviar el formulario */}
+        <IonButton type="submit" expand="block">
+          Guardar Alumno
+        </IonButton>
       </form>
     </div>
   );
