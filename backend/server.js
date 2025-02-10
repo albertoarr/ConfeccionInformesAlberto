@@ -13,7 +13,7 @@ const connection = postgres({
   host: "localhost",
   user: "postgres",
   password: "5206",
-  database: "colegio",
+  database: "matriculaAlberto",
 });
 
 // CREATE

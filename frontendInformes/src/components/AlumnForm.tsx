@@ -10,8 +10,10 @@ import {
   IonToggle,
   IonCheckbox,
 } from "@ionic/react";
-import { useInsertAlumno } from "../../hooks/useInsertAlumno";
-import { AlumnoNuevo } from "../../interfaces/interfaces";
+import { useInsertAlumno } from "../hooks/useInsertAlumno";
+import { AlumnoNuevo } from "../interfaces/interfaces";
+import { EraseIcon } from "./icons/EraseIcon";
+import { SaveIcon } from "./icons/SaveIcon";
 
 /**
  * Funcionamiento del formulario:
@@ -19,7 +21,11 @@ import { AlumnoNuevo } from "../../interfaces/interfaces";
  * 2. El "event" recibe los datos del nombre y valor de cada input.
  * 3. Luego, se actualiza el estado con los valores ingresados.
  */
-export default function AlumnForm({/* recibir el setAlumnos de home para hacer cositas*/}) {
+export default function AlumnForm(
+  {
+    /* recibir el setAlumnos de home para hacer cositas*/
+  }
+) {
   const { insertAlumno } = useInsertAlumno();
   const [alumnoNuevo, setAlumnoNuevo] = useState<AlumnoNuevo>({
     matricula: "",
@@ -49,11 +55,10 @@ export default function AlumnForm({/* recibir el setAlumnos de home para hacer c
     const target = event.target as HTMLInputElement;
 
     // Verifica si es un checkbox/toggle correctamente (no sé porqué target.value no existe)
-    let value = "checked" in target ? target.checked : target.value;
-    if ("checked" in target)
-      value = target.checked;
-    else
-      value = target.value
+    const value =
+      "checked" in target
+        ? target.checked
+        : (target as { value: string }).value;
 
     // Actualiza el state de alumno con los datos del "event"
     setAlumnoNuevo((prevState) => ({
@@ -74,7 +79,7 @@ export default function AlumnForm({/* recibir el setAlumnos de home para hacer c
   };
 
   return (
-    <div className="">
+    <div>
       <form onSubmit={handleSubmit}>
         <IonList>
           {/* Campo Matrícula */}
@@ -149,7 +154,11 @@ export default function AlumnForm({/* recibir el setAlumnos de home para hacer c
 
         {/* Botón para enviar el formulario */}
         <IonButton type="submit" expand="block">
-          Guardar Alumno
+          <SaveIcon />
+        </IonButton>
+        {/* Botón para borrar el formulario */}
+        <IonButton color="danger" expand="block" onClick={() => resetAlumno()}>
+          <EraseIcon />
         </IonButton>
       </form>
     </div>
