@@ -51,8 +51,8 @@ export default function AlumnModal({
   };
 
   useEffect(() => {
-    setAlumnoEditado(alumno)
-  }, [alumno])
+    setAlumnoEditado(alumno);
+  }, [alumno]);
 
   return (
     <IonModal
