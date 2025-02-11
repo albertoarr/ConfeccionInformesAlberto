@@ -10,7 +10,7 @@ import {
   IonToggle,
   IonCheckbox,
 } from "@ionic/react";
-import { useAlumno } from "../hooks/useAlumnos";
+import { useAlumno } from "../hooks/useAlumno";
 import { AlumnoNuevo } from "../interfaces/interfaces";
 import { EraseIcon } from "./icons/EraseIcon";
 import { SaveIcon } from "./icons/SaveIcon";
@@ -69,7 +69,7 @@ export default function AlumnForm(
     e.preventDefault(); // Evita que se recargue la página
     console.log("Submitting:", alumnoNuevo);
     insertAlumno(alumnoNuevo); // Lanza el POST a la API
-    alert("");
+    window.location.reload();
   };
 
   return (
@@ -147,11 +147,11 @@ export default function AlumnForm(
         </IonList>
 
         {/* Botón para enviar el formulario */}
-        <IonButton type="submit" expand="block">
+        <IonButton type="submit" expand="full">
           <SaveIcon />
         </IonButton>
         {/* Botón para borrar el formulario */}
-        <IonButton color="danger" expand="block" onClick={() => resetAlumno()}>
+        <IonButton color="danger" expand="full" onClick={() => resetAlumno()}>
           <EraseIcon />
         </IonButton>
       </form>

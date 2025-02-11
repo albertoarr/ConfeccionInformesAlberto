@@ -3,7 +3,7 @@ import { IonButton, IonIcon } from "@ionic/react";
 import { trash, create } from "ionicons/icons";
 import { Alumno } from "../interfaces/interfaces";
 import { useGetAlumnos } from "../hooks/useGetAlumnos";
-import { useAlumno } from "../hooks/useAlumnos";
+import { useAlumno } from "../hooks/useAlumno";
 import AlumnModal from "./AlumnModal"; // Importa el componente AlumnModal
 
 export default function AlumnList() {
@@ -24,9 +24,7 @@ export default function AlumnList() {
         alert(response.error); // Si hay error al eliminar, mostrarlo
       } else {
         alert("Alumno eliminado con éxito de la base de datos");
-        setAlumnos(
-          (prevAlumnos) => prevAlumnos?.filter((a) => a.id !== alumno.id) // Eliminar alumno de la lista
-        );
+        window.location.reload();
       }
     }
   };

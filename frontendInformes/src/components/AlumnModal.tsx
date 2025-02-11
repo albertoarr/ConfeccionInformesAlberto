@@ -17,7 +17,7 @@ import {
   IonTitle,
 } from "@ionic/react";
 import { Alumno } from "../interfaces/interfaces"; // Importa la interfaz Alumno
-import { useAlumno } from "../hooks/useAlumnos"
+import { useAlumno } from "../hooks/useAlumno";
 
 export default function AlumnModal({
   modal, // Recibe el modal ref desde el componente principal
@@ -48,6 +48,7 @@ export default function AlumnModal({
   const handleConfirm = () => {
     updateAlumno(alumnoEditado);
     modal.current?.dismiss();
+    window.location.reload();
   };
 
   useEffect(() => {
