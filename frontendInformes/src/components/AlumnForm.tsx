@@ -9,6 +9,7 @@ import {
   IonSelectOption,
   IonToggle,
   IonCheckbox,
+  IonText,
 } from "@ionic/react";
 import { useAlumno } from "../hooks/useAlumno";
 import { AlumnoNuevo } from "../interfaces/interfaces";
@@ -125,7 +126,7 @@ export default function AlumnForm(
               required
             />
           </IonItem>
-
+    
           {/* Campo Repetidor */}
           <IonItem>
             <IonLabel>Repetidor</IonLabel>
@@ -152,7 +153,11 @@ export default function AlumnForm(
           <SaveIcon />
         </IonButton>
         {/* Botón para borrar el formulario */}
-        <IonButton color="danger" expand="full" onClick={() => resetAlumno()}>
+        <IonButton
+          color="secondary"
+          expand="full"
+          onClick={() => resetAlumno()}
+        >
           <EraseIcon />
         </IonButton>
       </form>

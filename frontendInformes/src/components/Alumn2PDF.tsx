@@ -1,7 +1,7 @@
 import { IonButton } from "@ionic/react";
 import React from "react";
 import { jsPDF } from "jspdf";
-import "jspdf-autotable";
+import autoTable from "jspdf-autotable";
 import { useGetAlumnos } from "../hooks/useGetAlumnos";
 
 export default function Alumn2PDF() {
@@ -38,7 +38,7 @@ export default function Alumn2PDF() {
     ]);
 
     // Agregar la tabla al PDF
-    doc.autoTable({
+    autoTable(doc, {
       head: [headers],
       body: rows,
       startY: 30, // La tabla comienza un poco después del título
