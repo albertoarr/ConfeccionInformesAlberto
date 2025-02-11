@@ -5,22 +5,23 @@ import { Alumno } from "../interfaces/interfaces";
 import { useGetAlumnos } from "../hooks/useGetAlumnos";
 import { useAlumno } from "../hooks/useAlumno";
 import AlumnModal from "./AlumnModal"; // Importa el componente AlumnModal
-import Alumn2PDF from "./Alumn2PDF";
 
 export default function AlumnList() {
-  const { deleteAlumno } = useAlumno();
+  const { deleteAlumno } = useAlumno(); // hook delete
   const { data } = useGetAlumnos(); // Obtener los alumnos
   const [alumnos, setAlumnos] = useState<Alumno[] | undefined>(data); // Alumnos a mostrar en la tabla
-  const [selectedAlumno, setSelectedAlumno] = useState<Alumno | null>(null); // Alumno seleccionado para editar
+  const [selectedAlumno, setSelectedAlumno] = useState<Alumno | null>(null); // Alumno seleccionado para modal
   const modal = useRef<HTMLIonModalElement>(null); // Referencia al modal
 
+  // Necesario para mostrar los alumnos al inicio del programa
   useEffect(() => {
-    setAlumnos(data); // Actualizar la lista de alumnos cuando se obtienen nuevos datos
+    setAlumnos(data);
   }, [data]);
 
+  // Función flecha ejecutada al usar botón borrar
   const handleDelete = async (alumno: Alumno) => {
     if (alumno) {
-      const response = await deleteAlumno(alumno);
+      const response = await deleteAlumno(alumno); // hook Delete
       if (response.error) {
         alert(response.error); // Si hay error al eliminar, mostrarlo
       } else {
@@ -30,6 +31,7 @@ export default function AlumnList() {
     }
   };
 
+  // Función flecha ejecutada al usar botón Editar
   const handleEdit = async (alumno: Alumno) => {
     await setSelectedAlumno(alumno); // Establecer el alumno seleccionado para el modal
     modal.current?.present(); // Mostrar el modal
@@ -85,7 +87,7 @@ export default function AlumnList() {
         </tbody>
       </table>
 
-      {/* Modal para editar el alumno seleccionado */}
+      {/* Modal que se abre para editar el alumno seleccionado */}
       {selectedAlumno && <AlumnModal modal={modal} alumno={selectedAlumno} />}
     </div>
   );

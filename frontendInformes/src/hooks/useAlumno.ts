@@ -22,19 +22,6 @@ export function useAlumno() {
     }
   };
 
-  const getAlumnos = async () => {
-    try {
-      const response = await fetch("http://localhost:3002/api/alumnos");
-      const jsonData = await response.json();
-
-      setData(jsonData);
-      console.log(jsonData);
-    } catch (error) {
-      console.log("Error al llamar al Api", error);
-    }
-    return { data };
-  };
-
   const deleteAlumno = async (alumno: Alumno) => {
     try {
       const response = await fetch(

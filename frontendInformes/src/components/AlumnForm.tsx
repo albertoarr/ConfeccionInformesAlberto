@@ -17,12 +17,10 @@ import { EraseIcon } from "./icons/EraseIcon";
 import { SaveIcon } from "./icons/SaveIcon";
 import Alumn2PDF from "./Alumn2PDF";
 
-export default function AlumnForm(
-  {
-    /* recibir el setAlumnos de home para hacer cositas*/
-  }
-) {
-  const { insertAlumno } = useAlumno();
+export default function AlumnForm() {
+  // Hook de insert en la BD
+  const { insertAlumno } = useAlumno(); 
+  // State de alumno a introducir
   const [alumnoNuevo, setAlumnoNuevo] = useState<AlumnoNuevo>({
     matricula: "",
     nombre: "",
@@ -50,7 +48,7 @@ export default function AlumnForm(
   const handleChange = (event: CustomEvent) => {
     const target = event.target as HTMLInputElement;
 
-    // Verifica si es un checkbox/toggle correctamente (no sé porqué target.value no existe)
+    // Verifica si es un checkbox/toggle correctamente (hay que castear target.value)
     const value =
       "checked" in target
         ? target.checked
@@ -126,7 +124,7 @@ export default function AlumnForm(
               required
             />
           </IonItem>
-    
+
           {/* Campo Repetidor */}
           <IonItem>
             <IonLabel>Repetidor</IonLabel>
@@ -140,7 +138,7 @@ export default function AlumnForm(
           {/* Campo Activo */}
           <IonItem>
             <IonLabel>Activo</IonLabel>
-            <IonCheckbox
+            <IonToggle
               name="activo"
               checked={alumnoNuevo.activo}
               onIonChange={handleChange}

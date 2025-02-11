@@ -4,7 +4,6 @@ import {
   IonButtons,
   IonContent,
   IonHeader,
-  IonIcon,
   IonInput,
   IonItem,
   IonLabel,
@@ -16,15 +15,15 @@ import {
   IonToolbar,
   IonTitle,
 } from "@ionic/react";
-import { Alumno } from "../interfaces/interfaces"; // Importa la interfaz Alumno
+import { Alumno } from "../interfaces/interfaces";
 import { useAlumno } from "../hooks/useAlumno";
 
 export default function AlumnModal({
-  modal, // Recibe el modal ref desde el componente principal
-  alumno, // Recibe el alumno seleccionado desde el componente principal
+  modal, // Recibe la referencia del modal
+  alumno, // Recibe el alumno seleccionado para el cambio
 }: {
   modal: React.RefObject<HTMLIonModalElement>; // Tipo de referencia para el modal
-  alumno: Alumno; // Tipo de alumno que se pasará al modal
+  alumno: Alumno; // Alumno que se pasará
 }) {
   const { updateAlumno } = useAlumno(); // Hook para actualizar los datos del alumno
 
@@ -44,7 +43,7 @@ export default function AlumnModal({
     }));
   };
 
-  // Función que se ejecuta cuando el usuario hace clic en "Confirmar"
+  // Función que se ejecuta cuando el usuario hace click en "Confirmar"
   const handleConfirm = () => {
     updateAlumno(alumnoEditado);
     modal.current?.dismiss();
