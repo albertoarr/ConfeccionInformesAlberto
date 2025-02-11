@@ -17,7 +17,7 @@ import {
   IonTitle,
 } from "@ionic/react";
 import { Alumno } from "../interfaces/interfaces"; // Importa la interfaz Alumno
-import { useUpdateAlumno } from "../hooks/useUpdateAlumno"; // Hook para actualizar los datos del alumno
+import { useAlumno } from "../hooks/useAlumnos"
 
 export default function AlumnModal({
   modal, // Recibe el modal ref desde el componente principal
@@ -26,7 +26,7 @@ export default function AlumnModal({
   modal: React.RefObject<HTMLIonModalElement>; // Tipo de referencia para el modal
   alumno: Alumno; // Tipo de alumno que se pasará al modal
 }) {
-  const { updateAlumno } = useUpdateAlumno(); // Hook para actualizar los datos del alumno
+  const { updateAlumno } = useAlumno(); // Hook para actualizar los datos del alumno
 
   // Estado del alumno que será editado
   const [alumnoEditado, setAlumnoEditado] = useState<Alumno>(alumno);

@@ -1,24 +1,14 @@
-import React, { useEffect, useState, useRef } from "react";
-import {
-  IonButton,
-  IonButtons,
-  IonContent,
-  IonHeader,
-  IonIcon,
-  IonItem,
-  IonModal,
-  IonTitle,
-  IonToolbar,
-} from "@ionic/react";
+import { useEffect, useState, useRef } from "react";
+import { IonButton, IonIcon } from "@ionic/react";
 import { trash, create } from "ionicons/icons";
 import { Alumno } from "../interfaces/interfaces";
-import { useDeleteAlumno } from "../hooks/useDeleteAlumno";
 import { useGetAlumnos } from "../hooks/useGetAlumnos";
+import { useAlumno } from "../hooks/useAlumnos";
 import AlumnModal from "./AlumnModal"; // Importa el componente AlumnModal
 
 export default function AlumnList() {
+  const { deleteAlumno } = useAlumno();
   const { data } = useGetAlumnos(); // Obtener los alumnos
-  const { deleteAlumno } = useDeleteAlumno(); // Función para eliminar alumno
   const [alumnos, setAlumnos] = useState<Alumno[] | undefined>(data); // Alumnos a mostrar en la tabla
   const [selectedAlumno, setSelectedAlumno] = useState<Alumno | null>(null); // Alumno seleccionado para editar
   const modal = useRef<HTMLIonModalElement>(null); // Referencia al modal
@@ -34,8 +24,8 @@ export default function AlumnList() {
         alert(response.error); // Si hay error al eliminar, mostrarlo
       } else {
         alert("Alumno eliminado con éxito de la base de datos");
-        setAlumnos((prevAlumnos) =>
-          prevAlumnos?.filter((a) => a.id !== alumno.id) // Eliminar alumno de la lista
+        setAlumnos(
+          (prevAlumnos) => prevAlumnos?.filter((a) => a.id !== alumno.id) // Eliminar alumno de la lista
         );
       }
     }
@@ -97,9 +87,7 @@ export default function AlumnList() {
       </table>
 
       {/* Modal para editar el alumno seleccionado */}
-      {selectedAlumno && (
-        <AlumnModal modal={modal} alumno={selectedAlumno} />
-      )}
+      {selectedAlumno && <AlumnModal modal={modal} alumno={selectedAlumno} />}
     </div>
   );
 }

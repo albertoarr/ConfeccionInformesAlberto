@@ -10,23 +10,17 @@ import {
   IonToggle,
   IonCheckbox,
 } from "@ionic/react";
-import { useInsertAlumno } from "../hooks/useInsertAlumno";
+import { useAlumno } from "../hooks/useAlumnos";
 import { AlumnoNuevo } from "../interfaces/interfaces";
 import { EraseIcon } from "./icons/EraseIcon";
 import { SaveIcon } from "./icons/SaveIcon";
 
-/**
- * Funcionamiento del formulario:
- * 1. Al hacer submit se obtiene un "event".
- * 2. El "event" recibe los datos del nombre y valor de cada input.
- * 3. Luego, se actualiza el estado con los valores ingresados.
- */
 export default function AlumnForm(
   {
     /* recibir el setAlumnos de home para hacer cositas*/
   }
 ) {
-  const { insertAlumno } = useInsertAlumno();
+  const { insertAlumno } = useAlumno();
   const [alumnoNuevo, setAlumnoNuevo] = useState<AlumnoNuevo>({
     matricula: "",
     nombre: "",
