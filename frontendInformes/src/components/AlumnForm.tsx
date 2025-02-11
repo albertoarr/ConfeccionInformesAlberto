@@ -14,6 +14,7 @@ import { useAlumno } from "../hooks/useAlumno";
 import { AlumnoNuevo } from "../interfaces/interfaces";
 import { EraseIcon } from "./icons/EraseIcon";
 import { SaveIcon } from "./icons/SaveIcon";
+import Alumn2PDF from "./Alumn2PDF";
 
 export default function AlumnForm(
   {

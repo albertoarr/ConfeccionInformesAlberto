@@ -5,6 +5,7 @@ import { Alumno } from "../interfaces/interfaces";
 import { useGetAlumnos } from "../hooks/useGetAlumnos";
 import { useAlumno } from "../hooks/useAlumno";
 import AlumnModal from "./AlumnModal"; // Importa el componente AlumnModal
+import Alumn2PDF from "./Alumn2PDF";
 
 export default function AlumnList() {
   const { deleteAlumno } = useAlumno();
