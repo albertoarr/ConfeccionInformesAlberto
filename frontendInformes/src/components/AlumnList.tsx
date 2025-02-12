@@ -37,6 +37,7 @@ export default function AlumnList() {
     modal.current?.present(); // Mostrar el modal
   };
 
+  // Renderiza una tabla con todos los alumnos 
   return (
     <div
       className="table-bordered table-responsive"

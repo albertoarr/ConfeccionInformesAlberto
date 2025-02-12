@@ -1,4 +1,3 @@
-import React from "react";
 import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -81,6 +80,7 @@ export default function AlumnCharts() {
   // Genera un div con las dos tablas (una al lado de otra)
   return (
     <div
+      id="graficos" // Id para recuperar imagen
       style={{
         display: "flex",
         justifyContent: "center",

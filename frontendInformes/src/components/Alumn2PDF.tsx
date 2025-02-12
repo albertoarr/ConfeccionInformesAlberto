@@ -1,24 +1,33 @@
 import { IonButton } from "@ionic/react";
-import React from "react";
-import { jsPDF } from "jspdf";
-import autoTable from "jspdf-autotable";
 import { useGetAlumnos } from "../hooks/useGetAlumnos";
+import autoTable from "jspdf-autotable";
+import html2canvas from "html2canvas";
+import { jsPDF } from "jspdf";
 
 export default function Alumn2PDF() {
   const { data: alumnos } = useGetAlumnos();
+  // Recogemos ID del div de gráficos
+  const graficos = document.getElementById("graficos");
 
   const generarPDF = async () => {
     const doc = new jsPDF();
 
     // Agregar imágenes al PDF desde la carpeta public.
     // Poniendo formato JPEG ahorro problemas de formato PNG.
-    doc.addImage("/LogoGOBCAN.png", "JPEG", 20, 15, 30, 20);
-    doc.addImage("/InfoIES.png", "JPEG", 80, 10, 50, 30);
-    doc.addImage("/Logo IES.png", "JPEG", 150, 15, 40, 20);
+    doc.addImage("/LogoGOBCAN.png", "JPEG", 20, 15, 35, 20);
+    doc.addImage("/InfoIES.png", "JPEG", 75, 10, 55, 30);
+    doc.addImage("/Logo IES.png", "JPEG", 145, 15, 50, 20);
+
+    // Graficos
+    if (graficos) {
+      const graficosCanvas = await html2canvas(graficos);
+      const graficosToImg = graficosCanvas.toDataURL("image/jpeg");
+      doc.addImage(graficosToImg, "JPEG", 20, 50, 180, 50);
+    }
 
     // Título
     doc.setFontSize(18);
-    doc.text("Lista de Alumnos", 20, 60);
+    doc.text("Lista de Alumnos", 20, 110);
 
     // Cabecera de la tabla
     const headers = [
@@ -46,7 +55,7 @@ export default function Alumn2PDF() {
     autoTable(doc, {
       head: [headers],
       body: rows,
-      startY: 70, // La tabla empieza después de las imágenes y título
+      startY: 120, // La tabla empieza después de las imágenes y título
     });
 
     // Número de página
