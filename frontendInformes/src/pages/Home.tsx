@@ -5,7 +5,6 @@ import {
   IonRow,
   IonToolbar,
   IonTitle,
-  IonButton,
 } from "@ionic/react";
 import AlumnList from "../components/AlumnList";
 import AlumnForm from "../components/AlumnForm";
@@ -19,7 +18,7 @@ export default function Home() {
         <IonTitle style={{ flex: 1, textAlign: "center" }}>
           Gestión de Matrículas
         </IonTitle>
-        <div slot="start" style={{padding:"10px"}}>
+        <div slot="start" style={{ padding: "10px" }}>
           <Alumn2PDF />
         </div>
       </IonToolbar>
