@@ -5,7 +5,6 @@ import autoTable from "jspdf-autotable";
 import { useGetAlumnos } from "../hooks/useGetAlumnos";
 
 export default function Alumn2PDF() {
-  // Datos de los alumnos
   const { data: alumnos } = useGetAlumnos();
 
   const generarPDF = async () => {

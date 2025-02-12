@@ -26,7 +26,7 @@ export default function AlumnList() {
         alert(response.error); // Si hay error al eliminar, mostrarlo
       } else {
         alert("Alumno eliminado con éxito de la base de datos");
-        window.location.reload();
+        window.location.reload(); // Se recarga la página al completo
       }
     }
   };

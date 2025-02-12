@@ -23,9 +23,10 @@ ChartJS.register(
 export default function AlumnCharts() {
   const { data: alumnos = [] } = useGetAlumnos(); // Objeto alumnos como array para filtrar
 
+  // Cuenta de alumnos de sexo específico
   const countSex = (gender: string) =>
     alumnos.filter((alumno) => alumno.sexo === gender).length;
-
+  // Cuenta de repetidores
   const countRetake = (repite: boolean) =>
     alumnos.filter((alumno) => alumno.repetidor === repite).length;
 
@@ -77,6 +78,7 @@ export default function AlumnCharts() {
     },
   };
 
+  // Genera un div con las dos tablas (una al lado de otra)
   return (
     <div
       style={{

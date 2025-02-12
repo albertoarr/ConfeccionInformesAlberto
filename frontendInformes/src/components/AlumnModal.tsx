@@ -50,10 +50,12 @@ export default function AlumnModal({
     window.location.reload();
   };
 
+  // Recogemos alumno seleccionado en lista
   useEffect(() => {
     setAlumnoEditado(alumno);
   }, [alumno]);
 
+  // Renderiza un modal que se autodestruye cuando salimos de él
   return (
     <IonModal
       ref={modal} // Referencia al modal
