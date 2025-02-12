@@ -40,7 +40,7 @@ export default function AlumnList() {
   return (
     <div
       className="table-bordered table-responsive"
-      style={{ maxHeight: "75vh" }}
+      style={{ maxHeight: "50vh" }}
     >
       <table className="table table-dark table-striped text-center align-middle">
         <thead>

@@ -20,7 +20,7 @@ ChartJS.register(
   Legend
 );
 
-function AlumnCharts() {
+export default function AlumnCharts() {
   const { data: alumnos = [] } = useGetAlumnos(); // Objeto alumnos como array para filtrar
 
   const countSex = (gender: string) =>
@@ -31,7 +31,7 @@ function AlumnCharts() {
 
   // Datos y opciones de sexos para el chart
   const sexData = {
-    labels: ["Hombres", "Mujeres"],
+    labels: ["Hombre", "Mujer"],
     datasets: [
       {
         label: "Cantidad de Alumnos",
@@ -52,7 +52,6 @@ function AlumnCharts() {
       },
     },
   };
-  
 
   // Datos y opciones de repetidores para el chart
   const retakeData = {
@@ -79,11 +78,20 @@ function AlumnCharts() {
   };
 
   return (
-    <div style={{ width: "100%", maxWidth: "500px", margin: "auto" }}>
-      <Bar data={sexData} options={sexOptions} />
-      <Bar data={retakeData} options={retakeOptions} />
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        width: "50%",
+        margin: "100px",
+      }}
+    >
+      <div style={{ width: "100%" }}>
+        <Bar data={sexData} options={sexOptions} />
+      </div>
+      <div style={{ width: "100%" }}>
+        <Bar data={retakeData} options={retakeOptions} />
+      </div>
     </div>
   );
 }
-
-export default AlumnCharts;
