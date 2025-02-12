@@ -10,7 +10,7 @@ import {
 import AlumnList from "../components/AlumnList";
 import AlumnForm from "../components/AlumnForm";
 import Alumn2PDF from "../components/Alumn2PDF";
-import AlumnChart from "../components/AlumnChart";
+import AlumnCharts from "../components/AlumnCharts";
 
 export default function Home() {
   return (
@@ -40,7 +40,7 @@ export default function Home() {
         </IonRow>
         <IonRow>
           <IonCol>
-            <AlumnChart />
+            <AlumnCharts />
           </IonCol>
         </IonRow>
       </IonGrid>

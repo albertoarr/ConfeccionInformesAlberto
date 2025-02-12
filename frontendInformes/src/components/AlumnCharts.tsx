@@ -20,7 +20,7 @@ ChartJS.register(
   Legend
 );
 
-function AlumnChart() {
+function AlumnCharts() {
   const { data: alumnos = [] } = useGetAlumnos(); // Objeto alumnos como array para filtrar
 
   const countSex = (gender: string) =>
@@ -29,6 +29,7 @@ function AlumnChart() {
   const countRetake = (repite: boolean) =>
     alumnos.filter((alumno) => alumno.repetidor === repite).length;
 
+  // Datos y opciones de sexos para el chart
   const sexData = {
     labels: ["Hombres", "Mujeres"],
     datasets: [
@@ -39,18 +40,6 @@ function AlumnChart() {
       },
     ],
   };
-
-  const retakeData = {
-    labels: ["Primer Año", "Repetidor"],
-    datasets: [
-      {
-        label: "Cantidad de Alumnos",
-        data: [countRetake(false), countRetake(true)],
-        backgroundColor: ["#36A2EB", "#FF6384"],
-      },
-    ],
-  };
-
   const sexOptions = {
     responsive: true,
     plugins: {
@@ -63,7 +52,19 @@ function AlumnChart() {
       },
     },
   };
+  
 
+  // Datos y opciones de repetidores para el chart
+  const retakeData = {
+    labels: ["Primer Año", "Repetidor"],
+    datasets: [
+      {
+        label: "Cantidad de Alumnos",
+        data: [countRetake(false), countRetake(true)],
+        backgroundColor: ["#36A2EB", "#FF6384"],
+      },
+    ],
+  };
   const retakeOptions = {
     responsive: true,
     plugins: {
@@ -85,4 +86,4 @@ function AlumnChart() {
   );
 }
 
-export default AlumnChart;
+export default AlumnCharts;
