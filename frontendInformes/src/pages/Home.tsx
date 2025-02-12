@@ -7,10 +7,10 @@ import {
   IonTitle,
   IonButton,
 } from "@ionic/react";
-import { useGetAlumnos } from "../hooks/useGetAlumnos";
 import AlumnList from "../components/AlumnList";
 import AlumnForm from "../components/AlumnForm";
 import Alumn2PDF from "../components/Alumn2PDF";
+import AlumnChart from "../components/AlumnChart";
 
 export default function Home() {
   return (
@@ -36,6 +36,11 @@ export default function Home() {
           </IonCol>
           <IonCol size="5">
             <AlumnForm />
+          </IonCol>
+        </IonRow>
+        <IonRow>
+          <IonCol>
+            <AlumnChart />
           </IonCol>
         </IonRow>
       </IonGrid>
